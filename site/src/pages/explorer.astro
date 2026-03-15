@@ -1,0 +1,890 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Logo Explorer" description="Interactive flask logo design explorer for Alkemical Development">
+  <article class="explorer">
+    <header>
+      <h1>Logo Explorer</h1>
+      <p class="lead">
+        Vector image builder for the Alkemical flask mark. Choose
+        <strong>Reference</strong> for pixel-perfect original paths, or
+        <strong>Procedural</strong> for full parametric control. Adjust colors,
+        stroke, and size to explore variations.
+        <a href="/experiments/flask-3d">Try the 3D generative flask</a> (first-principles surface of revolution).
+      </p>
+    </header>
+
+    <div class="explorer-grid">
+      <section class="preview-section">
+        <div class="preview-stage bg-light" aria-hidden="true">
+          <div id="flask-preview" class="preview-flask"></div>
+        </div>
+        <div class="preview-backgrounds">
+          <button
+            type="button"
+            class="bg-swatch"
+            data-bg="dark"
+            title="Dark background"
+          >
+            Dark
+          </button>
+          <button
+            type="button"
+            class="bg-swatch"
+            data-bg="light"
+            title="Light background"
+            aria-pressed="true"
+          >
+            Light
+          </button>
+        </div>
+      </section>
+
+      <aside class="controls-panel">
+        <h2>Parameters</h2>
+
+        <div class="control-group template-section">
+          <label class="template-label">Template</label>
+          <div class="template-buttons">
+            <button
+              type="button"
+              data-template="reference"
+              title="Original canonical paths — pixel-perfect match"
+            >
+              Reference
+            </button>
+            <button
+              type="button"
+              data-template="procedural"
+              title="Parametric geometry — defaults match reference"
+              aria-pressed="true"
+            >
+              Procedural
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="liquid1">Liquid base</label>
+          <div class="color-row">
+            <input
+              type="color"
+              id="liquid1"
+              value="#60A879"
+              aria-label="Liquid base color"
+            />
+            <input
+              type="text"
+              id="liquid1-hex"
+              value="#60A879"
+              class="hex-input"
+              maxlength="7"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="liquid2">Liquid top</label>
+          <div class="color-row">
+            <input
+              type="color"
+              id="liquid2"
+              value="#9955BB"
+              aria-label="Liquid top color"
+            />
+            <input
+              type="text"
+              id="liquid2-hex"
+              value="#9955BB"
+              class="hex-input"
+              maxlength="7"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="stroke">Stroke</label>
+          <div class="color-row">
+            <input
+              type="color"
+              id="stroke"
+              value="#0a0b14"
+              aria-label="Stroke color"
+            />
+            <input
+              type="text"
+              id="stroke-hex"
+              value="#0a0b14"
+              class="hex-input"
+              maxlength="7"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="stroke-width">
+            Stroke width <span id="stroke-width-value">0.5</span>
+          </label>
+          <input
+            type="range"
+            id="stroke-width"
+            min="0.25"
+            max="2"
+            step="0.25"
+            value="0.5"
+            aria-label="Stroke width"
+          />
+        </div>
+
+        <div id="geometry-section" class="control-group geometry-section">
+          <label class="geometry-label">Geometry</label>
+
+          <div class="control-group">
+            <label for="neck-hw">Neck width <span id="neck-hw-value">1.36</span></label>
+            <input type="range" id="neck-hw" min="0.3" max="3.0" step="0.05" value="1.355" aria-label="Neck width"/>
+          </div>
+          <div class="control-group">
+            <label for="shoulder-hw">Shoulder width <span id="shoulder-hw-value">5.27</span></label>
+            <input type="range" id="shoulder-hw" min="1.0" max="7.5" step="0.05" value="5.27" aria-label="Shoulder width"/>
+          </div>
+          <div class="control-group">
+            <label for="body-hw">Body width <span id="body-hw-value">6.46</span></label>
+            <input type="range" id="body-hw" min="1.5" max="7.5" step="0.05" value="6.46" aria-label="Body width"/>
+          </div>
+          <div class="control-group">
+            <label for="neck-h">Neck height <span id="neck-h-value">3.44</span></label>
+            <input type="range" id="neck-h" min="1.0" max="6.0" step="0.05" value="3.445" aria-label="Neck height"/>
+          </div>
+          <div class="control-group">
+            <label for="body-h">Body height <span id="body-h-value">9.24</span></label>
+            <input type="range" id="body-h" min="4.0" max="13.0" step="0.1" value="9.24" aria-label="Body height"/>
+          </div>
+          <div class="control-group">
+            <label for="shoulder-ratio">Shoulder span <span id="shoulder-ratio-value">0.31</span></label>
+            <input type="range" id="shoulder-ratio" min="0.10" max="0.70" step="0.01" value="0.31" aria-label="Shoulder height ratio"/>
+          </div>
+          <div class="control-group">
+            <label for="flare-ratio">Flare span <span id="flare-ratio-value">0.21</span></label>
+            <input type="range" id="flare-ratio" min="0.05" max="0.45" step="0.01" value="0.21" aria-label="Flare height ratio"/>
+          </div>
+          <div class="control-group">
+            <label for="shoulder-curve">Shoulder curve <span id="shoulder-curve-value">0.50</span></label>
+            <input type="range" id="shoulder-curve" min="0" max="1" step="0.05" value="0.5" aria-label="Shoulder curve bias"/>
+          </div>
+          <div class="control-group">
+            <label for="bottom-h">Bottom depth <span id="bottom-h-value">1.66</span></label>
+            <input type="range" id="bottom-h" min="0.5" max="4.0" step="0.05" value="1.66" aria-label="Bottom arc height"/>
+          </div>
+          <div class="control-group">
+            <label for="liquid-level">Liquid level <span id="liquid-level-value">100</span>%</label>
+            <input type="range" id="liquid-level" min="0" max="100" step="5" value="100" aria-label="Liquid fill level"/>
+          </div>
+          <div class="control-group">
+            <label for="stopper-hw">Stopper width <span id="stopper-hw-value">1.36</span></label>
+            <input type="range" id="stopper-hw" min="0.3" max="2.5" step="0.05" value="1.355" aria-label="Stopper width"/>
+          </div>
+          <div class="control-group">
+            <label for="stopper-h">Stopper height <span id="stopper-h-value">1.13</span></label>
+            <input type="range" id="stopper-h" min="0.3" max="2.0" step="0.05" value="1.13" aria-label="Stopper height"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="size">
+            Size <span id="size-value">256</span>px
+          </label>
+          <input
+            type="range"
+            id="size"
+            min="64"
+            max="512"
+            step="32"
+            value="256"
+            aria-label="Logo size"
+          />
+        </div>
+
+        <div class="control-group presets">
+          <label>Presets</label>
+          <div class="preset-buttons">
+            <button type="button" data-preset="original">Original</button>
+            <button type="button" data-preset="gold">Gold</button>
+            <button type="button" data-preset="ember">Ember</button>
+            <button type="button" data-preset="azure">Azure</button>
+            <button type="button" data-preset="obsidian">Obsidian</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <button type="button" id="copy-svg" class="action-btn">
+            Copy SVG
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <section class="debug-section">
+      <h2>Debug: Side-by-Side Comparison</h2>
+      <p class="export-note">
+        Reference (original SVG paths) vs Procedural (generated) — default params should produce identical shapes.
+      </p>
+      <div class="debug-grid">
+        <div class="debug-item">
+          <div class="debug-label">Reference</div>
+          <div id="debug-reference" class="debug-preview bg-light"></div>
+        </div>
+        <div class="debug-item">
+          <div class="debug-label">Procedural</div>
+          <div id="debug-procedural" class="debug-preview bg-light"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="export-section">
+      <h2>Export</h2>
+      <p class="export-note">
+        Use the parameterized SVG in your projects by copying the generated
+        markup below, or download a static SVG file.
+      </p>
+      <div class="code-block">
+        <pre><code id="svg-output">Loading...</code></pre>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<script>
+  import { buildScene, SCENES } from "../lib/vector-builder/index.js";
+
+  // Derived from src/logo/flask.svg — matches reference at default
+  const DEFAULT_GEOM = {
+    neckHW: 1.355,
+    shoulderHW: 5.27,
+    bodyHW: 6.46,
+    neckH: 3.445,
+    bodyH: 9.24,
+    shoulderRatio: 0.31,
+    flareRatio: 0.21,
+    shoulderCurve: 0.5,
+    bottomH: 1.66,
+    cornerBotHWfrac: 0.838,
+    liquidLevel: 1.0,
+    stopperH: 1.13,
+    stopperHW: 1.355,
+  };
+
+  const PRESETS = {
+    original: {
+      liquid1: "#60A879",
+      liquid2: "#9955BB",
+      stroke: "#0a0b14",
+      strokeWidth: 0.5,
+      geom: { ...DEFAULT_GEOM }, // resets geometry to reference defaults
+    },
+    gold: {
+      liquid1: "#ecc55c",
+      liquid2: "#d4990f",
+      stroke: "#0a0b14",
+      strokeWidth: 0.5,
+    },
+    ember: {
+      liquid1: "#f5965c",
+      liquid2: "#d95a1a",
+      stroke: "#0a0b14",
+      strokeWidth: 0.5,
+    },
+    azure: {
+      liquid1: "#7ba5db",
+      liquid2: "#3668b0",
+      stroke: "#0a0b14",
+      strokeWidth: 0.5,
+    },
+    obsidian: {
+      liquid1: "#4e5169",
+      liquid2: "#2b2d40",
+      stroke: "#fafaf9",
+      strokeWidth: 0.5,
+    },
+  };
+
+  function $(sel, root = document) {
+    return root.querySelector(sel);
+  }
+
+  function $all(sel, root = document) {
+    return [...root.querySelectorAll(sel)];
+  }
+
+  function syncColorInput(colorInput, hexInput) {
+    hexInput.value = colorInput.value;
+  }
+
+  function syncHexInput(hexInput, colorInput) {
+    const val = hexInput.value.trim();
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+      colorInput.value = val;
+    }
+  }
+
+  function setIfNotFocused(el, val) {
+    if (el && document.activeElement !== el) el.value = val;
+  }
+
+  function buildSvg(state) {
+    const base = state.template === "reference" ? SCENES.referenceFlask : SCENES.proceduralFlask;
+    const scene = {
+      ...base,
+      style: {
+        liquid1: state.liquid1,
+        liquid2: state.liquid2,
+        stroke: state.stroke,
+        strokeWidth: state.strokeWidth,
+      },
+      width: state.size,
+      height: state.size,
+    };
+    if (state.template === "procedural") {
+      scene.layers = scene.layers.map((l) => ({
+        ...l,
+        params: { ...l.params, ...state.geom },
+      }));
+    }
+    return buildScene(scene, { comment: "Alkemical Development Flask Logo" });
+  }
+
+  function updatePreview(state) {
+    const preview = $("#flask-preview");
+    if (!preview) return;
+
+    preview.style.width = state.size + "px";
+    preview.style.height = state.size + "px";
+    preview.innerHTML = buildSvg(state);
+
+    $("#liquid1").value = state.liquid1;
+    setIfNotFocused($("#liquid1-hex"), state.liquid1);
+    $("#liquid2").value = state.liquid2;
+    setIfNotFocused($("#liquid2-hex"), state.liquid2);
+    $("#stroke").value = state.stroke;
+    setIfNotFocused($("#stroke-hex"), state.stroke);
+    $("#stroke-width").value = state.strokeWidth;
+    $("#stroke-width-value").textContent = state.strokeWidth;
+    $("#size").value = state.size;
+    $("#size-value").textContent = state.size;
+
+    const geomSection = $("#geometry-section");
+    if (geomSection) geomSection.hidden = state.template !== "procedural";
+
+    const g = state.geom;
+    function syncSlider(id, val, decimals = 2) {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+      const vEl = document.getElementById(id + "-value");
+      if (vEl) vEl.textContent = typeof val === "number" ? val.toFixed(decimals) : val;
+    }
+    syncSlider("neck-hw",       g.neckHW);
+    syncSlider("shoulder-hw",   g.shoulderHW);
+    syncSlider("body-hw",       g.bodyHW);
+    syncSlider("neck-h",        g.neckH);
+    syncSlider("body-h",        g.bodyH);
+    syncSlider("shoulder-ratio",g.shoulderRatio);
+    syncSlider("flare-ratio",   g.flareRatio);
+    syncSlider("shoulder-curve",g.shoulderCurve);
+    syncSlider("bottom-h",      g.bottomH);
+    $("#liquid-level").value = Math.round(g.liquidLevel * 100);
+    $("#liquid-level-value").textContent = Math.round(g.liquidLevel * 100);
+    syncSlider("stopper-hw", g.stopperHW);
+    syncSlider("stopper-h",  g.stopperH);
+
+    // Debug side-by-side
+    const debugSize = 200;
+    const debugRefScene = {
+      ...SCENES.referenceFlask,
+      style: { liquid1: state.liquid1, liquid2: state.liquid2, stroke: state.stroke, strokeWidth: state.strokeWidth },
+      width: debugSize, height: debugSize,
+    };
+    const debugProcScene = {
+      ...SCENES.proceduralFlask,
+      style: { liquid1: state.liquid1, liquid2: state.liquid2, stroke: state.stroke, strokeWidth: state.strokeWidth },
+      width: debugSize, height: debugSize,
+      layers: SCENES.proceduralFlask.layers.map((l) => ({
+        ...l,
+        params: { ...l.params, ...state.geom },
+      })),
+    };
+    const debugRef = $("#debug-reference");
+    if (debugRef) {
+      debugRef.style.width = debugSize + "px";
+      debugRef.style.height = debugSize + "px";
+      debugRef.innerHTML = buildScene(debugRefScene, { comment: "debug ref" });
+    }
+    const debugProc = $("#debug-procedural");
+    if (debugProc) {
+      debugProc.style.width = debugSize + "px";
+      debugProc.style.height = debugSize + "px";
+      debugProc.innerHTML = buildScene(debugProcScene, { comment: "debug proc" });
+    }
+
+    const exportState = { ...state, size: 128 };
+    const codeEl = $("#svg-output");
+    if (codeEl) codeEl.textContent = buildSvg(exportState);
+  }
+
+  let state = {
+    template: "procedural",
+    liquid1: "#60A879",
+    liquid2: "#9955BB",
+    stroke: "#0a0b14",
+    strokeWidth: 0.5,
+    size: 256,
+    geom: { ...DEFAULT_GEOM },
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    updatePreview(state);
+
+    $all("[data-template]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.template = btn.dataset.template;
+        $all("[data-template]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+        updatePreview(state);
+      });
+    });
+
+    $("#liquid1").addEventListener("input", function (e) {
+      state.liquid1 = e.target.value;
+      syncColorInput(e.target, $("#liquid1-hex"));
+      updatePreview(state);
+    });
+    $("#liquid1-hex").addEventListener("input", function (e) {
+      syncHexInput(e.target, $("#liquid1"));
+      state.liquid1 = $("#liquid1").value;
+      updatePreview(state);
+    });
+
+    $("#liquid2").addEventListener("input", function (e) {
+      state.liquid2 = e.target.value;
+      syncColorInput(e.target, $("#liquid2-hex"));
+      updatePreview(state);
+    });
+    $("#liquid2-hex").addEventListener("input", function (e) {
+      syncHexInput(e.target, $("#liquid2"));
+      state.liquid2 = $("#liquid2").value;
+      updatePreview(state);
+    });
+
+    $("#stroke").addEventListener("input", function (e) {
+      state.stroke = e.target.value;
+      syncColorInput(e.target, $("#stroke-hex"));
+      updatePreview(state);
+    });
+    $("#stroke-hex").addEventListener("input", function (e) {
+      syncHexInput(e.target, $("#stroke"));
+      state.stroke = $("#stroke").value;
+      updatePreview(state);
+    });
+
+    $("#stroke-width").addEventListener("input", function (e) {
+      state.strokeWidth = parseFloat(e.target.value);
+      updatePreview(state);
+    });
+
+    $("#size").addEventListener("input", function (e) {
+      state.size = parseInt(e.target.value, 10);
+      updatePreview(state);
+    });
+
+    function bindGeom(id, key, parse) {
+      if (!parse) parse = parseFloat;
+      const el = document.getElementById(id);
+      if (el)
+        el.addEventListener("input", function (e) {
+          state.geom[key] = parse(e.target.value);
+          updatePreview(state);
+        });
+    }
+    bindGeom("neck-hw",       "neckHW");
+    bindGeom("shoulder-hw",   "shoulderHW");
+    bindGeom("body-hw",       "bodyHW");
+    bindGeom("neck-h",        "neckH");
+    bindGeom("body-h",        "bodyH");
+    bindGeom("shoulder-ratio","shoulderRatio");
+    bindGeom("flare-ratio",   "flareRatio");
+    bindGeom("shoulder-curve","shoulderCurve");
+    bindGeom("bottom-h",      "bottomH");
+    bindGeom("liquid-level",  "liquidLevel", (v) => parseInt(v, 10) / 100);
+    bindGeom("stopper-hw",    "stopperHW");
+    bindGeom("stopper-h",     "stopperH");
+
+    $all("[data-preset]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const p = PRESETS[btn.dataset.preset];
+        if (p) {
+          state = {
+            ...state,
+            liquid1: p.liquid1 || state.liquid1,
+            liquid2: p.liquid2 || state.liquid2,
+            stroke: p.stroke || state.stroke,
+            strokeWidth: p.strokeWidth != null ? p.strokeWidth : state.strokeWidth,
+            geom: { ...(p.geom || state.geom) },
+          };
+          updatePreview(state);
+        }
+      });
+    });
+
+    $all(".bg-swatch").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        $all(".bg-swatch").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+        const stage = $(".preview-stage");
+        if (stage) stage.classList.toggle("bg-light", btn.dataset.bg === "light");
+      });
+    });
+
+    $("#copy-svg").addEventListener("click", function () {
+      const text = $("#svg-output")?.textContent;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(function () {
+        const btn = $("#copy-svg");
+        btn.textContent = "Copied!";
+        setTimeout(() => (btn.textContent = "Copy SVG"), 1500);
+      });
+    });
+  });
+</script>
+
+<style>
+  .explorer {
+    padding-bottom: var(--brand-spacing-16);
+  }
+
+  .explorer header {
+    margin-bottom: var(--brand-spacing-10);
+  }
+
+  .explorer h1 {
+    font-size: var(--brand-typography-scale-4xl);
+    margin-bottom: var(--brand-spacing-3);
+  }
+
+  .lead {
+    font-size: var(--brand-typography-scale-lg);
+    color: var(--brand-color-semantic-text-muted);
+    max-width: 42rem;
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  .explorer-grid {
+    display: grid;
+    grid-template-columns: 1fr 20rem;
+    gap: var(--brand-spacing-12);
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .explorer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .preview-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--brand-spacing-4);
+  }
+
+  .preview-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 18rem;
+    padding: var(--brand-spacing-8);
+    border-radius: var(--brand-radius-xl);
+    border: 1px solid var(--brand-color-semantic-border);
+    background: var(--brand-color-semantic-surface);
+  }
+
+  .preview-stage.bg-dark {
+    background: var(--brand-color-semantic-surface);
+  }
+
+  .preview-stage.bg-light {
+    background: var(--brand-color-primitive-obsidian-100);
+  }
+
+  .preview-flask {
+    transition: width 0.2s ease, height 0.2s ease;
+  }
+
+  .preview-backgrounds {
+    display: flex;
+    gap: var(--brand-spacing-2);
+  }
+
+  .bg-swatch {
+    padding: var(--brand-spacing-2) var(--brand-spacing-4);
+    font-size: var(--brand-typography-scale-sm);
+    font-weight: var(--brand-typography-weight-medium);
+    color: var(--brand-color-semantic-text-muted);
+    background: var(--brand-color-semantic-surface-raised);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-md);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .bg-swatch:hover {
+    color: var(--brand-color-semantic-text);
+  }
+
+  .bg-swatch[aria-pressed="true"] {
+    color: var(--brand-color-semantic-primary);
+    border-color: var(--brand-color-semantic-primary);
+  }
+
+  .controls-panel {
+    position: sticky;
+    top: var(--brand-spacing-4);
+    padding: var(--brand-spacing-6);
+    background: var(--brand-color-semantic-surface-raised);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+  }
+
+  .controls-panel h2 {
+    font-size: var(--brand-typography-scale-lg);
+    margin-bottom: var(--brand-spacing-4);
+    color: var(--brand-color-semantic-text);
+  }
+
+  .template-section .template-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--brand-spacing-2);
+    margin-top: var(--brand-spacing-2);
+  }
+
+  .template-section button {
+    padding: var(--brand-spacing-2) var(--brand-spacing-3);
+    font-size: var(--brand-typography-scale-xs);
+    font-weight: var(--brand-typography-weight-medium);
+    color: var(--brand-color-semantic-text-muted);
+    background: var(--brand-color-semantic-surface);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-md);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .template-section button:hover {
+    color: var(--brand-color-semantic-primary);
+    border-color: var(--brand-color-semantic-primary);
+  }
+
+  .template-section button[aria-pressed="true"] {
+    color: var(--brand-color-semantic-primary);
+    border-color: var(--brand-color-semantic-primary);
+  }
+
+  .control-group {
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .control-group:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .control-group label {
+    display: block;
+    font-size: var(--brand-typography-scale-sm);
+    font-weight: var(--brand-typography-weight-medium);
+    color: var(--brand-color-semantic-text-muted);
+    margin-bottom: var(--brand-spacing-2);
+  }
+
+  .color-row {
+    display: flex;
+    gap: var(--brand-spacing-2);
+    align-items: center;
+  }
+
+  .color-row input[type="color"] {
+    width: 2.5rem;
+    height: 2rem;
+    padding: 2px;
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-sm);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hex-input {
+    flex: 1;
+    font-family: var(--brand-typography-family-mono);
+    font-size: var(--brand-typography-scale-sm);
+    padding: var(--brand-spacing-2) var(--brand-spacing-3);
+    background: var(--brand-color-semantic-surface);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-md);
+    color: var(--brand-color-semantic-text);
+  }
+
+  .hex-input:focus {
+    outline: none;
+    border-color: var(--brand-color-semantic-primary);
+  }
+
+  .control-group input[type="range"] {
+    width: 100%;
+    margin-top: var(--brand-spacing-2);
+    accent-color: var(--brand-color-semantic-primary);
+  }
+
+  .geometry-section {
+    padding: var(--brand-spacing-4);
+    margin-bottom: var(--brand-spacing-4);
+    background: var(--brand-color-semantic-surface);
+    border: 1px solid var(--brand-color-semantic-border-subtle);
+    border-radius: var(--brand-radius-lg);
+  }
+
+  .geometry-label {
+    font-weight: var(--brand-typography-weight-semibold);
+    color: var(--brand-color-semantic-text);
+    margin-bottom: var(--brand-spacing-3);
+    display: block;
+  }
+
+  .geometry-section .control-group {
+    margin-bottom: var(--brand-spacing-3);
+  }
+
+  .geometry-section .control-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .presets .preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--brand-spacing-2);
+    margin-top: var(--brand-spacing-2);
+  }
+
+  .presets button {
+    padding: var(--brand-spacing-2) var(--brand-spacing-3);
+    font-size: var(--brand-typography-scale-xs);
+    font-weight: var(--brand-typography-weight-medium);
+    color: var(--brand-color-semantic-text-muted);
+    background: var(--brand-color-semantic-surface);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-md);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .presets button:hover {
+    color: var(--brand-color-semantic-primary);
+    border-color: var(--brand-color-semantic-primary);
+  }
+
+  .action-btn {
+    width: 100%;
+    padding: var(--brand-spacing-3) var(--brand-spacing-4);
+    font-size: var(--brand-typography-scale-sm);
+    font-weight: var(--brand-typography-weight-medium);
+    color: var(--brand-color-semantic-surface);
+    background: var(--brand-color-semantic-primary);
+    border: none;
+    border-radius: var(--brand-radius-md);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .action-btn:hover {
+    background: var(--brand-color-semantic-primary-light);
+  }
+
+  .debug-section {
+    margin-top: var(--brand-spacing-12);
+    padding-top: var(--brand-spacing-10);
+    border-top: 1px solid var(--brand-color-semantic-border);
+  }
+
+  .debug-section h2 {
+    font-size: var(--brand-typography-scale-2xl);
+    margin-bottom: var(--brand-spacing-2);
+  }
+
+  .debug-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--brand-spacing-6);
+    margin-top: var(--brand-spacing-6);
+  }
+
+  .debug-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--brand-spacing-3);
+  }
+
+  .debug-label {
+    font-size: var(--brand-typography-scale-sm);
+    font-weight: var(--brand-typography-weight-medium);
+    color: var(--brand-color-semantic-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .debug-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--brand-spacing-4);
+    border-radius: var(--brand-radius-lg);
+    border: 1px solid var(--brand-color-semantic-border);
+  }
+
+  .debug-preview.bg-light {
+    background: var(--brand-color-primitive-obsidian-100);
+  }
+
+  .export-section {
+    margin-top: var(--brand-spacing-12);
+    padding-top: var(--brand-spacing-10);
+    border-top: 1px solid var(--brand-color-semantic-border);
+  }
+
+  .export-section h2 {
+    font-size: var(--brand-typography-scale-2xl);
+    margin-bottom: var(--brand-spacing-2);
+  }
+
+  .export-note {
+    color: var(--brand-color-semantic-text-muted);
+    margin-bottom: var(--brand-spacing-4);
+    font-size: var(--brand-typography-scale-sm);
+  }
+
+  .code-block {
+    overflow-x: auto;
+    padding: var(--brand-spacing-4);
+    background: var(--brand-color-semantic-surface-overlay);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-lg);
+  }
+
+  .code-block pre {
+    margin: 0;
+    font-size: var(--brand-typography-scale-xs);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+</style>

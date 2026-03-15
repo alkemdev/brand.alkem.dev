@@ -1,0 +1,170 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Downloads" description="Download Alkemical Development brand assets">
+  <section class="page-header">
+    <h1>Downloads</h1>
+    <p>
+      Grab the assets you need. Everything here is generated from source files
+      in the repo and licensed under CC BY-SA 4.0 (assets) or MIT (code).
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Logo</h2>
+    <div class="download-grid">
+      <div class="download-card">
+        <h3>SVG</h3>
+        <p>Scalable vector — best for web and print</p>
+        <code>out/logo/svg/</code>
+      </div>
+      <div class="download-card">
+        <h3>PNG</h3>
+        <p>Rasterized at 64, 128, 256, 512, 1024px</p>
+        <code>out/logo/png/</code>
+      </div>
+      <div class="download-card">
+        <h3>WebP</h3>
+        <p>Web-optimized raster format</p>
+        <code>out/logo/webp/</code>
+      </div>
+      <div class="download-card">
+        <h3>Blender Source</h3>
+        <p>Editable .blend file for modifications</p>
+        <code>src/logo/</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Stylesheets</h2>
+    <div class="download-grid">
+      <div class="download-card">
+        <h3>CSS Custom Properties</h3>
+        <p>Drop-in brand tokens for any web project</p>
+        <code>out/stylesheets/brand.css</code>
+      </div>
+      <div class="download-card">
+        <h3>SCSS Variables</h3>
+        <p>Variables, maps, and mixins for Sass projects</p>
+        <code>out/stylesheets/brand.scss</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Fonts</h2>
+    <div class="download-grid">
+      <div class="download-card">
+        <h3>Martian Grotesk</h3>
+        <p>Display typeface — variable, OFL-1.1</p>
+        <a href="https://github.com/evilmartians/grotesk" class="ext-link">GitHub</a>
+      </div>
+      <div class="download-card">
+        <h3>Inter</h3>
+        <p>Body typeface — variable, OFL-1.1</p>
+        <a href="https://github.com/rsms/inter" class="ext-link">GitHub</a>
+      </div>
+      <div class="download-card">
+        <h3>JetBrains Mono</h3>
+        <p>Monospace — variable, OFL-1.1</p>
+        <a href="https://github.com/JetBrains/JetBrainsMono" class="ext-link">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Design Tokens (Raw)</h2>
+    <div class="download-grid">
+      <div class="download-card">
+        <h3>tokens.json</h3>
+        <p>Complete token definitions — colors, typography, spacing, radii, shadows</p>
+        <code>src/palette/tokens.json</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section note">
+    <p>
+      All files are available in the
+      <a href="https://github.com/alkemdev/brand.alkem.dev">GitHub repository</a>.
+      Clone the repo and run <code>just build</code> to regenerate all exports locally.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--brand-spacing-10);
+    border-bottom: 1px solid var(--brand-color-semantic-border);
+    margin-bottom: var(--brand-spacing-10);
+  }
+
+  .page-header h1 {
+    font-size: var(--brand-typography-scale-5xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .page-header p {
+    max-width: 40rem;
+    color: var(--brand-color-semantic-text-muted);
+    font-size: var(--brand-typography-scale-lg);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  .section {
+    margin-bottom: var(--brand-spacing-12);
+  }
+
+  .section h2 {
+    font-size: var(--brand-typography-scale-2xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: var(--brand-spacing-4);
+  }
+
+  .download-card {
+    padding: var(--brand-spacing-6);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+    background: var(--brand-color-semantic-surface-raised);
+  }
+
+  .download-card h3 {
+    font-size: var(--brand-typography-scale-lg);
+    margin-bottom: var(--brand-spacing-2);
+  }
+
+  .download-card p {
+    font-size: var(--brand-typography-scale-sm);
+    color: var(--brand-color-semantic-text-muted);
+    margin-bottom: var(--brand-spacing-3);
+  }
+
+  .download-card code {
+    font-size: var(--brand-typography-scale-xs);
+    color: var(--brand-color-semantic-primary);
+  }
+
+  .ext-link {
+    font-size: var(--brand-typography-scale-sm);
+    font-weight: var(--brand-typography-weight-medium);
+  }
+
+  .note {
+    padding: var(--brand-spacing-6);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+    background: var(--brand-color-semantic-surface-raised);
+    text-align: center;
+  }
+
+  .note p {
+    color: var(--brand-color-semantic-text-muted);
+  }
+</style>

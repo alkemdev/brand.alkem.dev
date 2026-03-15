@@ -1,0 +1,36 @@
+# Generated output (reproducible from src/ via `just build`)
+out/
+
+# Astro site build
+site/dist/
+site/.astro/
+
+# Node
+node_modules/
+.npm
+*.tgz
+
+# Blender
+*.blend1
+*.blend2
+*.blend3
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Editor
+.vscode/
+!.vscode/settings.json
+.idea/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Rust (added for rewrite)
+/target/
+Cargo.lock

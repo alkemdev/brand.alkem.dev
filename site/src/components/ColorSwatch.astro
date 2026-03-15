@@ -1,0 +1,55 @@
+---
+interface Props {
+  name: string;
+  value: string;
+  cssVar?: string;
+}
+
+const { name, value, cssVar } = Astro.props;
+---
+
+<div class="swatch">
+  <div class="swatch-color" style={`background-color: ${value}`}></div>
+  <div class="swatch-info">
+    <span class="swatch-name">{name}</span>
+    <code class="swatch-value">{value}</code>
+    {cssVar && <code class="swatch-var">{cssVar}</code>}
+  </div>
+</div>
+
+<style>
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: var(--brand-spacing-2);
+  }
+
+  .swatch-color {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--brand-radius-lg);
+    border: 1px solid var(--brand-color-semantic-border);
+  }
+
+  .swatch-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--brand-spacing-0\.5);
+  }
+
+  .swatch-name {
+    font-weight: var(--brand-typography-weight-medium);
+    font-size: var(--brand-typography-scale-sm);
+  }
+
+  .swatch-value {
+    font-size: var(--brand-typography-scale-xs);
+    color: var(--brand-color-semantic-text-muted);
+  }
+
+  .swatch-var {
+    font-size: 0.65rem;
+    color: var(--brand-color-semantic-text-muted);
+    opacity: 0.7;
+  }
+</style>

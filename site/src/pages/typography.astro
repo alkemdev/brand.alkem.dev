@@ -1,0 +1,250 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FontSpecimen from "../components/FontSpecimen.astro";
+---
+
+<BaseLayout title="Typography" description="Font selections, type scale, and pairing guidelines for Alkemical Development">
+  <section class="page-header">
+    <h1>Typography</h1>
+    <p>
+      Three open-source variable fonts form our typographic system: a distinctive
+      display face for impact, a refined body face for readability, and a developer
+      monospace for code. See <code>src/typography/FONT_CHOICES.md</code> for
+      full rationale.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Typefaces</h2>
+    <div class="specimens">
+      <FontSpecimen
+        name="Martian Grotesk"
+        family="'Martian Grotesk', system-ui, sans-serif"
+        description="Display — headings, hero text, brand marks"
+        weights={["300", "400", "500", "600", "700", "900"]}
+      />
+      <FontSpecimen
+        name="Inter"
+        family="'Inter', system-ui, sans-serif"
+        description="Body — text, documentation, UI"
+        weights={["300", "400", "500", "600", "700"]}
+      />
+      <FontSpecimen
+        name="JetBrains Mono"
+        family="'JetBrains Mono', ui-monospace, monospace"
+        description="Monospace — code samples, terminal output"
+        weights={["300", "400", "500", "700"]}
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Type Scale</h2>
+    <p class="section-desc">
+      Based on a modular scale, defined as tokens. All sizes are in <code>rem</code>.
+    </p>
+    <div class="scale">
+      <div class="scale-row">
+        <code class="scale-label">7xl</code>
+        <span class="scale-sample" style="font-size: 4.5rem">Aa</span>
+        <code class="scale-value">4.5rem / 72px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">6xl</code>
+        <span class="scale-sample" style="font-size: 3.75rem">Aa</span>
+        <code class="scale-value">3.75rem / 60px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">5xl</code>
+        <span class="scale-sample" style="font-size: 3rem">Aa</span>
+        <code class="scale-value">3rem / 48px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">4xl</code>
+        <span class="scale-sample" style="font-size: 2.25rem">Aa</span>
+        <code class="scale-value">2.25rem / 36px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">3xl</code>
+        <span class="scale-sample" style="font-size: 1.875rem">Aa</span>
+        <code class="scale-value">1.875rem / 30px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">2xl</code>
+        <span class="scale-sample" style="font-size: 1.5rem">Aa</span>
+        <code class="scale-value">1.5rem / 24px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">xl</code>
+        <span class="scale-sample" style="font-size: 1.25rem">Aa</span>
+        <code class="scale-value">1.25rem / 20px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">lg</code>
+        <span class="scale-sample" style="font-size: 1.125rem">Aa</span>
+        <code class="scale-value">1.125rem / 18px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">base</code>
+        <span class="scale-sample" style="font-size: 1rem">Aa</span>
+        <code class="scale-value">1rem / 16px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">sm</code>
+        <span class="scale-sample" style="font-size: 0.875rem">Aa</span>
+        <code class="scale-value">0.875rem / 14px</code>
+      </div>
+      <div class="scale-row">
+        <code class="scale-label">xs</code>
+        <span class="scale-sample" style="font-size: 0.75rem">Aa</span>
+        <code class="scale-value">0.75rem / 12px</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Pairing</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Context</th>
+          <th>Font</th>
+          <th>Weight</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero / display</td>
+          <td>Martian Grotesk</td>
+          <td>Bold–Black</td>
+          <td>3xl–7xl</td>
+        </tr>
+        <tr>
+          <td>Section heading</td>
+          <td>Martian Grotesk</td>
+          <td>Semibold</td>
+          <td>2xl–4xl</td>
+        </tr>
+        <tr>
+          <td>Subheading</td>
+          <td>Inter</td>
+          <td>Semibold</td>
+          <td>lg–xl</td>
+        </tr>
+        <tr>
+          <td>Body text</td>
+          <td>Inter</td>
+          <td>Regular</td>
+          <td>base</td>
+        </tr>
+        <tr>
+          <td>Small / caption</td>
+          <td>Inter</td>
+          <td>Regular</td>
+          <td>sm–xs</td>
+        </tr>
+        <tr>
+          <td>Code</td>
+          <td>JetBrains Mono</td>
+          <td>Regular</td>
+          <td>sm–base</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--brand-spacing-10);
+    border-bottom: 1px solid var(--brand-color-semantic-border);
+    margin-bottom: var(--brand-spacing-10);
+  }
+
+  .page-header h1 {
+    font-size: var(--brand-typography-scale-5xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .page-header p {
+    max-width: 40rem;
+    color: var(--brand-color-semantic-text-muted);
+    font-size: var(--brand-typography-scale-lg);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  .section {
+    margin-bottom: var(--brand-spacing-12);
+  }
+
+  .section h2 {
+    font-size: var(--brand-typography-scale-2xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .section-desc {
+    color: var(--brand-color-semantic-text-muted);
+    margin-bottom: var(--brand-spacing-6);
+  }
+
+  .specimens {
+    display: flex;
+    flex-direction: column;
+    gap: var(--brand-spacing-6);
+  }
+
+  .scale {
+    display: flex;
+    flex-direction: column;
+    gap: var(--brand-spacing-3);
+  }
+
+  .scale-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--brand-spacing-6);
+    padding: var(--brand-spacing-2) 0;
+    border-bottom: 1px solid var(--brand-color-semantic-border-subtle);
+  }
+
+  .scale-label {
+    flex-shrink: 0;
+    width: 4rem;
+    font-size: var(--brand-typography-scale-xs);
+    color: var(--brand-color-semantic-primary);
+  }
+
+  .scale-sample {
+    flex-shrink: 0;
+    width: 6rem;
+    font-family: var(--brand-typography-family-display);
+    font-weight: var(--brand-typography-weight-bold);
+    line-height: 1;
+  }
+
+  .scale-value {
+    font-size: var(--brand-typography-scale-xs);
+    color: var(--brand-color-semantic-text-muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--brand-typography-scale-sm);
+  }
+
+  th, td {
+    text-align: left;
+    padding: var(--brand-spacing-3) var(--brand-spacing-4);
+    border-bottom: 1px solid var(--brand-color-semantic-border-subtle);
+  }
+
+  th {
+    color: var(--brand-color-semantic-text-muted);
+    font-weight: var(--brand-typography-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--brand-typography-letterSpacing-wider);
+    font-size: var(--brand-typography-scale-xs);
+  }
+</style>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Brand Guidelines">
+  <section class="hero">
+    <h1>Alkemical<br />Development</h1>
+    <p class="hero-sub">
+      Open source software, crafted with intention. These guidelines define
+      the visual language, voice, and aesthetic system behind everything we build.
+    </p>
+  </section>
+
+  <section class="grid">
+    <a href="/explorer" class="card">
+      <h2>Logo Explorer</h2>
+      <p>Interactive flask logo designer</p>
+    </a>
+    <a href="/experiments/flask-3d" class="card">
+      <h2>3D Flask Experiment</h2>
+      <p>First-principles generative 3D flask (surface of revolution)</p>
+    </a>
+    <a href="/identity" class="card">
+      <h2>Identity</h2>
+      <p>Logo, marks, and usage rules</p>
+    </a>
+    <a href="/color" class="card">
+      <h2>Color</h2>
+      <p>Palette, tokens, and application</p>
+    </a>
+    <a href="/typography" class="card">
+      <h2>Typography</h2>
+      <p>Fonts, scale, and pairing</p>
+    </a>
+    <a href="/voice" class="card">
+      <h2>Voice & Tone</h2>
+      <p>How we write and communicate</p>
+    </a>
+    <a href="/downloads" class="card">
+      <h2>Downloads</h2>
+      <p>Logos, assets, and stylesheets</p>
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--brand-spacing-16) 0 var(--brand-spacing-12);
+  }
+
+  .hero h1 {
+    font-size: var(--brand-typography-scale-7xl);
+    font-weight: var(--brand-typography-weight-black);
+    line-height: 0.95;
+    letter-spacing: var(--brand-typography-letterSpacing-tighter);
+    background: linear-gradient(
+      160deg,
+      var(--brand-color-semantic-primary) 0%,
+      var(--brand-color-semantic-accent) 60%,
+      var(--brand-color-semantic-secondary) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    margin-top: var(--brand-spacing-6);
+    max-width: 36rem;
+    font-size: var(--brand-typography-scale-lg);
+    color: var(--brand-color-semantic-text-muted);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--brand-spacing-4);
+    padding-bottom: var(--brand-spacing-16);
+  }
+
+  .card {
+    display: block;
+    padding: var(--brand-spacing-6);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+    background: var(--brand-color-semantic-surface-raised);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+  }
+
+  .card:hover {
+    border-color: var(--brand-color-semantic-primary);
+    box-shadow: var(--brand-shadow-glow-gold);
+  }
+
+  .card h2 {
+    font-size: var(--brand-typography-scale-xl);
+    margin-bottom: var(--brand-spacing-2);
+    color: var(--brand-color-semantic-text);
+  }
+
+  .card p {
+    font-size: var(--brand-typography-scale-sm);
+    color: var(--brand-color-semantic-text-muted);
+  }
+</style>

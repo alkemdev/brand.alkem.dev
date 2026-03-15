@@ -1,0 +1,188 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Voice & Tone" description="Writing guidelines and communication style for Alkemical Development">
+  <section class="page-header">
+    <h1>Voice & Tone</h1>
+    <p>
+      How we write shapes how people experience our work. These guidelines help
+      maintain a consistent voice across docs, READMEs, social posts, and
+      conversations.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Principles</h2>
+    <div class="principles">
+      <div class="principle">
+        <h3>Clear over clever</h3>
+        <p>
+          Say what you mean directly. Developer time is valuable — don't make
+          people parse ambiguity. Jargon is fine when precise; hand-waving isn't.
+        </p>
+      </div>
+      <div class="principle">
+        <h3>Honest and grounded</h3>
+        <p>
+          Acknowledge limitations. Don't oversell. If something is experimental,
+          say so. If something is hard, don't pretend it's easy.
+        </p>
+      </div>
+      <div class="principle">
+        <h3>Warm but not performative</h3>
+        <p>
+          Be human without being fake. We like what we build and it shows —
+          but we don't need exclamation marks to prove it.
+        </p>
+      </div>
+      <div class="principle">
+        <h3>Technical depth, accessible surface</h3>
+        <p>
+          Lead with the practical — what it does, how to use it. Let people
+          go deeper if they want. Layer complexity, don't front-load it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Tone Spectrum</h2>
+    <p class="section-desc">Our tone adapts to context while the voice stays constant.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Context</th>
+          <th>Tone</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>README</td>
+          <td>Confident, concise</td>
+          <td>"A fast, composable build system for modern frontends."</td>
+        </tr>
+        <tr>
+          <td>Error message</td>
+          <td>Helpful, direct</td>
+          <td>"Config file not found at ./config.toml. Create one with `init`."</td>
+        </tr>
+        <tr>
+          <td>Blog post</td>
+          <td>Thoughtful, conversational</td>
+          <td>"We rewrote the parser. Here's why it was worth the pain."</td>
+        </tr>
+        <tr>
+          <td>Social</td>
+          <td>Casual, excited (sparingly)</td>
+          <td>"v2 is out. Faster, smaller, and it actually works offline now."</td>
+        </tr>
+        <tr>
+          <td>Issue response</td>
+          <td>Grateful, solution-oriented</td>
+          <td>"Good catch — this is a regression from #142. Fix incoming."</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section stub">
+    <h2>Writing Patterns</h2>
+    <p>
+      Detailed writing patterns — sentence structure, naming conventions,
+      capitalization rules, and more — will be added here as the brand evolves.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--brand-spacing-10);
+    border-bottom: 1px solid var(--brand-color-semantic-border);
+    margin-bottom: var(--brand-spacing-10);
+  }
+
+  .page-header h1 {
+    font-size: var(--brand-typography-scale-5xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .page-header p {
+    max-width: 40rem;
+    color: var(--brand-color-semantic-text-muted);
+    font-size: var(--brand-typography-scale-lg);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  .section {
+    margin-bottom: var(--brand-spacing-12);
+  }
+
+  .section h2 {
+    font-size: var(--brand-typography-scale-2xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .section-desc {
+    color: var(--brand-color-semantic-text-muted);
+    margin-bottom: var(--brand-spacing-6);
+  }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--brand-spacing-4);
+  }
+
+  .principle {
+    padding: var(--brand-spacing-6);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+    background: var(--brand-color-semantic-surface-raised);
+  }
+
+  .principle h3 {
+    font-size: var(--brand-typography-scale-lg);
+    margin-bottom: var(--brand-spacing-2);
+    color: var(--brand-color-semantic-primary);
+  }
+
+  .principle p {
+    font-size: var(--brand-typography-scale-sm);
+    color: var(--brand-color-semantic-text-muted);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--brand-typography-scale-sm);
+  }
+
+  th, td {
+    text-align: left;
+    padding: var(--brand-spacing-3) var(--brand-spacing-4);
+    border-bottom: 1px solid var(--brand-color-semantic-border-subtle);
+  }
+
+  th {
+    color: var(--brand-color-semantic-text-muted);
+    font-weight: var(--brand-typography-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--brand-typography-letterSpacing-wider);
+    font-size: var(--brand-typography-scale-xs);
+  }
+
+  .stub {
+    padding: var(--brand-spacing-8);
+    border: 1px dashed var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+    text-align: center;
+  }
+
+  .stub p {
+    color: var(--brand-color-semantic-text-muted);
+    font-style: italic;
+  }
+</style>

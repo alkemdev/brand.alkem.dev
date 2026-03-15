@@ -1,0 +1,104 @@
+---
+interface Props {
+  family: string;
+  name: string;
+  description: string;
+  weights: string[];
+  sampleText?: string;
+}
+
+const {
+  family,
+  name,
+  description,
+  weights,
+  sampleText = "Alkemical Development",
+} = Astro.props;
+---
+
+<div class="specimen">
+  <div class="specimen-header">
+    <h3>{name}</h3>
+    <p class="specimen-desc">{description}</p>
+  </div>
+
+  <div class="specimen-display" style={`font-family: ${family}`}>
+    <span class="specimen-hero">{sampleText}</span>
+  </div>
+
+  <div class="specimen-weights">
+    {weights.map((w) => (
+      <div class="weight-sample" style={`font-family: ${family}; font-weight: ${w}`}>
+        <span class="weight-label">{w}</span>
+        <span class="weight-text">The quick brown fox jumps over the lazy dog</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .specimen {
+    padding: var(--brand-spacing-6);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-xl);
+    background: var(--brand-color-semantic-surface-raised);
+  }
+
+  .specimen-header {
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .specimen-header h3 {
+    font-size: var(--brand-typography-scale-xl);
+    margin-bottom: var(--brand-spacing-1);
+  }
+
+  .specimen-desc {
+    color: var(--brand-color-semantic-text-muted);
+    font-size: var(--brand-typography-scale-sm);
+  }
+
+  .specimen-display {
+    padding: var(--brand-spacing-6) 0;
+    border-bottom: 1px solid var(--brand-color-semantic-border-subtle);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .specimen-hero {
+    font-size: var(--brand-typography-scale-5xl);
+    font-weight: 700;
+    line-height: var(--brand-typography-lineHeight-tight);
+    background: linear-gradient(
+      135deg,
+      var(--brand-color-semantic-primary) 0%,
+      var(--brand-color-semantic-accent) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .specimen-weights {
+    display: flex;
+    flex-direction: column;
+    gap: var(--brand-spacing-3);
+  }
+
+  .weight-sample {
+    display: flex;
+    align-items: baseline;
+    gap: var(--brand-spacing-4);
+  }
+
+  .weight-label {
+    flex-shrink: 0;
+    width: 3rem;
+    font-size: var(--brand-typography-scale-xs);
+    color: var(--brand-color-semantic-text-muted);
+    font-family: var(--brand-typography-family-mono);
+  }
+
+  .weight-text {
+    font-size: var(--brand-typography-scale-base);
+  }
+</style>

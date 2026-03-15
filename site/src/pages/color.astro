@@ -1,0 +1,177 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ColorSwatch from "../components/ColorSwatch.astro";
+---
+
+<BaseLayout title="Color" description="Color palette and design tokens for Alkemical Development">
+  <section class="page-header">
+    <h1>Color</h1>
+    <p>
+      An alchemical palette grounded in deep obsidian, lit by gold, ember, and
+      azure. All values are defined as design tokens in
+      <code>src/palette/tokens.json</code> and generated to CSS custom
+      properties via <code>just tokens</code>.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Semantic Colors</h2>
+    <p class="section-desc">Role-based colors for consistent application across all surfaces.</p>
+    <div class="swatch-grid">
+      <ColorSwatch name="Primary" value="#d4990f" cssVar="--brand-color-semantic-primary" />
+      <ColorSwatch name="Primary Light" value="#ecc55c" cssVar="--brand-color-semantic-primary-light" />
+      <ColorSwatch name="Primary Dark" value="#935b0b" cssVar="--brand-color-semantic-primary-dark" />
+      <ColorSwatch name="Secondary" value="#3668b0" cssVar="--brand-color-semantic-secondary" />
+      <ColorSwatch name="Accent" value="#d95a1a" cssVar="--brand-color-semantic-accent" />
+      <ColorSwatch name="Surface" value="#0a0b14" cssVar="--brand-color-semantic-surface" />
+      <ColorSwatch name="Surface Raised" value="#11121e" cssVar="--brand-color-semantic-surface-raised" />
+      <ColorSwatch name="Text" value="#fafaf9" cssVar="--brand-color-semantic-text" />
+      <ColorSwatch name="Text Muted" value="#a1a3b0" cssVar="--brand-color-semantic-text-muted" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Gold</h2>
+    <p class="section-desc">The primary brand color — warmth, transformation, value.</p>
+    <div class="swatch-grid swatch-grid-scale">
+      <ColorSwatch name="50" value="#fdf8ed" />
+      <ColorSwatch name="100" value="#f9eccc" />
+      <ColorSwatch name="200" value="#f3d994" />
+      <ColorSwatch name="300" value="#ecc55c" />
+      <ColorSwatch name="400" value="#e5b233" />
+      <ColorSwatch name="500" value="#d4990f" />
+      <ColorSwatch name="600" value="#b8790a" />
+      <ColorSwatch name="700" value="#935b0b" />
+      <ColorSwatch name="800" value="#6e4410" />
+      <ColorSwatch name="900" value="#4a2e0e" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Obsidian</h2>
+    <p class="section-desc">Surfaces and text — deep, dark, grounded.</p>
+    <div class="swatch-grid swatch-grid-scale">
+      <ColorSwatch name="50" value="#f4f4f6" />
+      <ColorSwatch name="100" value="#e4e4e8" />
+      <ColorSwatch name="200" value="#c8c9d1" />
+      <ColorSwatch name="300" value="#a1a3b0" />
+      <ColorSwatch name="400" value="#71748a" />
+      <ColorSwatch name="500" value="#4e5169" />
+      <ColorSwatch name="600" value="#3a3c52" />
+      <ColorSwatch name="700" value="#2b2d40" />
+      <ColorSwatch name="800" value="#1d1e2e" />
+      <ColorSwatch name="900" value="#11121e" />
+      <ColorSwatch name="950" value="#0a0b14" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Ember</h2>
+    <p class="section-desc">Accent and energy — urgency, warmth, action.</p>
+    <div class="swatch-grid swatch-grid-scale">
+      <ColorSwatch name="50" value="#fef3ed" />
+      <ColorSwatch name="100" value="#fce0cc" />
+      <ColorSwatch name="200" value="#f9bd94" />
+      <ColorSwatch name="300" value="#f5965c" />
+      <ColorSwatch name="400" value="#f17433" />
+      <ColorSwatch name="500" value="#d95a1a" />
+      <ColorSwatch name="600" value="#b54412" />
+      <ColorSwatch name="700" value="#8c3310" />
+      <ColorSwatch name="800" value="#662510" />
+      <ColorSwatch name="900" value="#44190d" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Azure</h2>
+    <p class="section-desc">Secondary and informational — depth, trust, clarity.</p>
+    <div class="swatch-grid swatch-grid-scale">
+      <ColorSwatch name="50" value="#eef3fa" />
+      <ColorSwatch name="100" value="#d4e2f4" />
+      <ColorSwatch name="200" value="#a9c5e9" />
+      <ColorSwatch name="300" value="#7ba5db" />
+      <ColorSwatch name="400" value="#5488cc" />
+      <ColorSwatch name="500" value="#3668b0" />
+      <ColorSwatch name="600" value="#2a5290" />
+      <ColorSwatch name="700" value="#213e6e" />
+      <ColorSwatch name="800" value="#192c4e" />
+      <ColorSwatch name="900" value="#111d34" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Using Tokens</h2>
+    <div class="code-block">
+      <pre><code>/* In CSS — reference generated custom properties */
+.element &#123;
+  background: var(--brand-color-semantic-surface);
+  color: var(--brand-color-semantic-text);
+  border-color: var(--brand-color-semantic-primary);
+&#125;
+
+/* In SCSS — use variables directly */
+.element &#123;
+  background: $brand-color-semantic-surface;
+  color: $brand-color-semantic-text;
+&#125;</code></pre>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: var(--brand-spacing-10);
+    border-bottom: 1px solid var(--brand-color-semantic-border);
+    margin-bottom: var(--brand-spacing-10);
+  }
+
+  .page-header h1 {
+    font-size: var(--brand-typography-scale-5xl);
+    margin-bottom: var(--brand-spacing-4);
+  }
+
+  .page-header p {
+    max-width: 40rem;
+    color: var(--brand-color-semantic-text-muted);
+    font-size: var(--brand-typography-scale-lg);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+
+  .section {
+    margin-bottom: var(--brand-spacing-12);
+  }
+
+  .section h2 {
+    font-size: var(--brand-typography-scale-2xl);
+    margin-bottom: var(--brand-spacing-2);
+  }
+
+  .section-desc {
+    color: var(--brand-color-semantic-text-muted);
+    margin-bottom: var(--brand-spacing-6);
+  }
+
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    gap: var(--brand-spacing-4);
+  }
+
+  .swatch-grid-scale {
+    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  }
+
+  .code-block {
+    background: var(--brand-color-semantic-surface-raised);
+    border: 1px solid var(--brand-color-semantic-border);
+    border-radius: var(--brand-radius-lg);
+    padding: var(--brand-spacing-6);
+    overflow-x: auto;
+  }
+
+  .code-block code {
+    font-size: var(--brand-typography-scale-sm);
+    color: var(--brand-color-semantic-text-muted);
+    line-height: var(--brand-typography-lineHeight-relaxed);
+  }
+</style>
