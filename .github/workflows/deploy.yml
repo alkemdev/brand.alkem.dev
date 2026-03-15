@@ -1,0 +1,68 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Set up Rust (stable + wasm32 target)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache Rust build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
+      - name: Install Dioxus CLI
+        run: cargo install dioxus-cli --locked
+
+      - name: Install Node deps
+        run: npm ci
+        working-directory: site
+
+      - name: Generate tokens
+        run: node scripts/tokens.mjs
+
+      - name: Build flask WASM app
+        run: |
+          cd crates/flaskgen/demo && dx build --platform web
+          mkdir -p site/public/tools/flask
+          cp -r target/dx/flaskgen-demo/debug/web/public/* site/public/tools/flask/
+
+      - name: Build site
+        run: |
+          mkdir -p site/public/brand
+          cp -r out/* site/public/brand/ 2>/dev/null || true
+          cd site && npm run build
+        env:
+          # Skip the prebuild's ensure-flask.js since we already built above
+          npm_config_ignore_scripts: ""
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site/dist --project-name=brand-alkem-dev --branch=${{ github.ref_name }}
