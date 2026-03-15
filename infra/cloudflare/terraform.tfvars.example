@@ -1,0 +1,4 @@
+account_id         = "your-cloudflare-account-id"
+zone_name          = "alkem.dev"
+pages_project_name = "brand-alkem-dev"
+subdomain          = "brand"

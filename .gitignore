@@ -35,6 +35,13 @@ Thumbs.db
 .env.local
 .env.*.local
 
+# Terraform / OpenTofu
+infra/**/.terraform/
+infra/**/terraform.tfstate
+infra/**/terraform.tfstate.backup
+infra/**/terraform.tfvars
+*.tfvars
+
 # Rust (added for rewrite)
 /target/
 Cargo.lock
