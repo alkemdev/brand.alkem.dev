@@ -8,9 +8,9 @@ tokens:
     node {{root}}/scripts/tokens.mjs
 
 build-flask:
-    cd {{root}}/crates/flaskgen/demo && dx build --platform web
+    cd {{root}}/crates/flaskgen/demo && dx build --platform web --release
     mkdir -p {{root}}/site/public/tools/flask
-    cp -r {{root}}/target/dx/flaskgen-demo/debug/web/public/* {{root}}/site/public/tools/flask/
+    cp -r {{root}}/target/dx/flaskgen-demo/release/web/public/* {{root}}/site/public/tools/flask/
 
 build-site: build-flask
 build-site:

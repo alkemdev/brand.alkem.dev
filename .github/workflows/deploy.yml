@@ -47,9 +47,9 @@ jobs:
 
       - name: Build flask WASM app
         run: |
-          cd crates/flaskgen/demo && dx build --platform web
+          cd crates/flaskgen/demo && dx build --platform web --release
           mkdir -p site/public/tools/flask
-          cp -r target/dx/flaskgen-demo/debug/web/public/* site/public/tools/flask/
+          cp -r target/dx/flaskgen-demo/release/web/public/* site/public/tools/flask/
 
       - name: Build site
         run: |
