@@ -16,6 +16,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </p>
     </header>
 
+    <!-- Rust/WASM app (built with just build, served at /tools/flask/) -->
+    <section class="flask-embed-section">
+      <h2>Flask generator (Rust/WASM)</h2>
+      <p class="embed-hint">Same math as below; runs as embedded app. If empty, run <code>just build</code> to build the demo.</p>
+      <iframe
+        src="/tools/flask/index.html"
+        title="Flask generator"
+        class="flask-iframe"
+      />
+    </section>
+
+    <h2 class="section-divider">JavaScript version (fallback)</h2>
     <div class="flask-3d-layout">
       <div class="canvas-wrap">
         <canvas id="flask-3d-canvas" aria-label="3D flask view"></canvas>
@@ -55,10 +67,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <div class="control-row">
           <div class="control-meta">
             <label for="neckRadius">Neck radius</label>
-            <span id="neckRadiusVal" class="control-val">0.07</span>
+            <span id="neckRadiusVal" class="control-val">0.08</span>
           </div>
           <span class="control-doc">Cylinder radius (constant section).</span>
-          <input type="range" id="neckRadius" min="0.02" max="0.2" step="0.01" value="0.07" />
+          <input type="range" id="neckRadius" min="0.02" max="0.2" step="0.01" value="0.08" />
         </div>
         <div class="control-row">
           <div class="control-meta">
@@ -241,6 +253,31 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
   }
+  .flask-embed-section {
+    margin-bottom: 2rem;
+  }
+  .flask-embed-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
+  }
+  .embed-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted, #555);
+    margin-bottom: 0.75rem;
+  }
+  .flask-iframe {
+    display: block;
+    width: 100%;
+    min-height: 560px;
+    border: none;
+    border-radius: 8px;
+    background: #1a1a1e;
+  }
+  .section-divider {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-muted, #555);
+  }
 </style>
 
 <script>
@@ -259,7 +296,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       baseHeight: parseFloat(document.getElementById("baseHeight")?.value ?? "0.05"),
       baseRadius: parseFloat(document.getElementById("baseRadius")?.value ?? "0.2"),
       bodyHeight: parseFloat(document.getElementById("bodyHeight")?.value ?? "0.45"),
-      neckRadius: parseFloat(document.getElementById("neckRadius")?.value ?? "0.07"),
+      neckRadius: parseFloat(document.getElementById("neckRadius")?.value ?? "0.08"),
       neckHeight: parseFloat(document.getElementById("neckHeight")?.value ?? "0.2"),
       lipHeight: parseFloat(document.getElementById("lipHeight")?.value ?? "0.03"),
       lipBump: parseFloat(document.getElementById("lipBump")?.value ?? "0.015"),

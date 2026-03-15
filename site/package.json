@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "prebuild": "node scripts/ensure-flask.js",
     "preview": "astro preview"
   },
   "dependencies": {

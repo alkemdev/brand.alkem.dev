@@ -1,21 +1,8 @@
-/* Import generated brand tokens */
+/* Brand tokens (generated from src/palette/tokens.json) */
 @import "/brand/stylesheets/brand.css";
 
-/* Font imports — variable fonts from Google Fonts CDN */
-@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300..700&display=swap");
-
-/*
- * Martian Grotesk is not on Google Fonts — load from local files if available,
- * otherwise fall back to system-ui.
- */
-@font-face {
-  font-family: "Martian Grotesk";
-  src: url("/brand/fonts/MartianGrotesk[wdth,wght].woff2") format("woff2-variations");
-  font-weight: 100 900;
-  font-stretch: 75% 125%;
-  font-display: swap;
-}
+/* Ubuntu + Ubuntu Mono — brand typography */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap");
 
 *,
 *::before,
@@ -32,31 +19,31 @@ html {
 }
 
 body {
-  font-family: var(--brand-typography-family-body);
+  font-family: var(--font-body);
   font-weight: var(--brand-typography-weight-regular);
   line-height: var(--brand-typography-lineHeight-normal);
-  color: var(--brand-color-semantic-text);
-  background-color: var(--brand-color-semantic-surface);
+  color: var(--color-text);
+  background-color: var(--color-surface);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--brand-typography-family-display);
+  font-family: var(--font-display);
   line-height: var(--brand-typography-lineHeight-tight);
   letter-spacing: var(--brand-typography-letterSpacing-tight);
 }
 
 code, pre {
-  font-family: var(--brand-typography-family-mono);
+  font-family: var(--font-mono);
 }
 
 a {
-  color: var(--brand-color-semantic-primary);
+  color: var(--color-primary);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 a:hover {
-  color: var(--brand-color-semantic-primary-light);
+  color: var(--color-primary-light);
 }
 
 img {

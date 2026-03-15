@@ -7,10 +7,8 @@ import FontSpecimen from "../components/FontSpecimen.astro";
   <section class="page-header">
     <h1>Typography</h1>
     <p>
-      Three open-source variable fonts form our typographic system: a distinctive
-      display face for impact, a refined body face for readability, and a developer
-      monospace for code. See <code>src/typography/FONT_CHOICES.md</code> for
-      full rationale.
+      We use <strong>Ubuntu</strong> for display and body, and <strong>Ubuntu Mono</strong> for code.
+      Both are our brand typefaces. See <code>src/typography/FONT_CHOICES.md</code> for rationale.
     </p>
   </section>
 
@@ -18,22 +16,16 @@ import FontSpecimen from "../components/FontSpecimen.astro";
     <h2>Typefaces</h2>
     <div class="specimens">
       <FontSpecimen
-        name="Martian Grotesk"
-        family="'Martian Grotesk', system-ui, sans-serif"
-        description="Display — headings, hero text, brand marks"
-        weights={["300", "400", "500", "600", "700", "900"]}
-      />
-      <FontSpecimen
-        name="Inter"
-        family="'Inter', system-ui, sans-serif"
-        description="Body — text, documentation, UI"
-        weights={["300", "400", "500", "600", "700"]}
-      />
-      <FontSpecimen
-        name="JetBrains Mono"
-        family="'JetBrains Mono', ui-monospace, monospace"
-        description="Monospace — code samples, terminal output"
+        name="Ubuntu"
+        family="'Ubuntu', system-ui, sans-serif"
+        description="Display & body — headings, UI, documentation"
         weights={["300", "400", "500", "700"]}
+      />
+      <FontSpecimen
+        name="Ubuntu Mono"
+        family="'Ubuntu Mono', ui-monospace, monospace"
+        description="Monospace — code samples, terminal output"
+        weights={["400", "700"]}
       />
     </div>
   </section>

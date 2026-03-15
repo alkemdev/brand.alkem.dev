@@ -1,0 +1,17 @@
+[package]
+name = "flaskgen-demo"
+version = "0.1.0"
+edition = "2021"
+description = "Demo app for flaskgen (uses flaskgen crate)"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "flaskgen-demo"
+path = "src/main.rs"
+
+[dependencies]
+flaskgen = { path = ".." }
+console_error_panic_hook = "0.1"
+dioxus = { version = "0.7", features = ["web", "macro"] }

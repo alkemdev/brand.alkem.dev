@@ -1,0 +1,13 @@
+[package]
+name = "flaskgen"
+version = "0.1.0"
+edition = "2021"
+description = "Generative 3D flask: profile math, mesh, OBJ export, and Dioxus UI component"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web", "macro", "hooks"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

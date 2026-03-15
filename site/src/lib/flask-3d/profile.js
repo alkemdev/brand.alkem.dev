@@ -55,7 +55,7 @@ function controlPointsFromParams(p) {
   const baseHeight = p.baseHeight ?? 0.05;
   const baseRadius = p.baseRadius ?? 0.2;
   const bodyHeight = p.bodyHeight ?? 0.45;
-  const neckRadius = p.neckRadius ?? 0.07;
+  const neckRadius = p.neckRadius ?? 0.08;
   const neckHeight = p.neckHeight ?? 0.2;
   const lipHeight = p.lipHeight ?? 0.03;
   const lipBump = p.lipBump ?? 0.015;
@@ -150,7 +150,7 @@ export const DEFAULT_PARAMS = {
   baseHeight: 0.05,
   baseRadius: 0.2,
   bodyHeight: 0.45,
-  neckRadius: 0.07,
+  neckRadius: 0.08,
   neckHeight: 0.2,
   lipHeight: 0.03,
   lipBump: 0.015,

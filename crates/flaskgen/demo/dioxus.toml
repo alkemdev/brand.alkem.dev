@@ -1,0 +1,21 @@
+# Dioxus 0.7 web config for flaskgen demo app
+[application]
+name = "flaskgen-demo"
+out_dir = "dist"
+asset_dir = "public"
+
+[web.app]
+title = "Flask Generator — Alkemical"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "public"]
+index_on_404 = true
+
+[web.resource]
+style = []
+script = []
+
+[web.resource.dev]
+style = []
+script = []
