@@ -42,6 +42,9 @@ infra/**/terraform.tfstate.backup
 infra/**/terraform.tfvars
 *.tfvars
 
-# Rust (added for rewrite)
+# Rust
 /target/
 Cargo.lock
+
+# Wrangler
+.wrangler/
